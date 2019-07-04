@@ -1,0 +1,22 @@
+.home {
+  &-banner {
+    position: relative;
+    &-image {
+      width: 100%;
+    }
+    &-search {
+      position: absolute;
+      right: 5%;
+      bottom: 30px;
+      left: 5%;
+      background-color: #fff;
+      border-radius: 7px;
+    }
+  }
+  &-take-photo {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+  }
+}
