@@ -1,7 +1,7 @@
 {
 	"miniprogramRoot": "dist/",
 	"projectname": "garbage-collector",
-	"description": "垃圾回收小程序",
+	"description": "垃圾回收小助手",
 	"appid": "wxffb1550f5403e86f",
 	"setting": {
 		"urlCheck": true,

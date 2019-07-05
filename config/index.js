@@ -1,6 +1,6 @@
 const config = {
   projectName: 'garbage-collector',
-  date: '2019-7-4',
+  date: '2019-7-5',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,

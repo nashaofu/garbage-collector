@@ -2,13 +2,14 @@
   "name": "garbage-collector",
   "version": "1.0.0",
   "private": true,
-  "description": "垃圾回收小程序",
+  "description": "垃圾回收小助手",
   "templateInfo": {
     "name": "default",
-    "typescript": true,
+    "typescript": false,
     "css": "sass"
   },
   "scripts": {
+    "lint": "eslint src --ext .js,.jsx --fix",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
@@ -22,7 +23,7 @@
     "dev:h5": "npm run build:h5 -- --watch",
     "dev:rn": "npm run build:rn -- --watch"
   },
-  "author": "",
+  "author": "nashaofu",
   "license": "MIT",
   "dependencies": {
     "@tarojs/components": "1.3.5",
@@ -45,7 +46,6 @@
     "@tarojs/webpack-runner": "1.3.5",
     "@types/react": "^16.4.6",
     "@types/webpack-env": "^1.13.6",
-    "@typescript-eslint/parser": "^1.6.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -59,7 +59,6 @@
     "eslint-plugin-taro": "1.3.5",
     "stylelint": "9.3.0",
     "stylelint-config-taro-rn": "1.3.5",
-    "stylelint-taro-rn": "1.3.5",
-    "typescript": "^3.0.1"
+    "stylelint-taro-rn": "1.3.5"
   }
 }

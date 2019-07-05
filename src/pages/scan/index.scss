@@ -1,0 +1,15 @@
+.scan {
+  &-camera {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 180px;
+    left: 0;
+  }
+  &-take-photo {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+  }
+}

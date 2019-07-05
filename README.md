@@ -1,2 +1,2 @@
 # garbage-collector
-垃圾回收小程序
+垃圾回收小助手
