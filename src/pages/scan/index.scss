@@ -3,13 +3,30 @@
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 180px;
+    bottom: 0;
     left: 0;
+    &-area {
+      width: 77vw;
+      height: 77vw;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translateX(-50%) translateY(-50%);
+      border: 2px solid #eee;
+    }
   }
   &-take-photo {
     position: absolute;
     left: 50%;
-    bottom: 30px;
+    bottom: 50px;
     transform: translateX(-50%);
+    .at-fab-hover {
+      background: #346fc2;
+      box-shadow: 0 14px 16px -8px rgba(0, 0, 0, 0.2), 0 24px 34px 4px rgba(0, 0, 0, 0.14),
+        0 10px 44px 8px rgba(0, 0, 0, 0.12);
+    }
+    &-icon {
+      padding: 32px;
+    }
   }
 }

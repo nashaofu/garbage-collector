@@ -1,6 +1,6 @@
-import { AtFab, AtIcon } from 'taro-ui'
 import Taro, { Component } from '@tarojs/taro'
-import { View, Camera } from '@tarojs/components'
+import { View, Camera, CoverView, CoverImage } from '@tarojs/components'
+import camera from './camera.png'
 import './index.scss'
 
 export default class Scan extends Component {
@@ -25,7 +25,7 @@ export default class Scan extends Component {
 
   takePhoto = () => {
     this.cameraContext.takePhoto({
-      quality: 'low',
+      quality: 'normal',
       success: res => {
         console.log(res)
       }
@@ -35,12 +35,16 @@ export default class Scan extends Component {
   render() {
     return (
       <View className='scan'>
-        <Camera className='scan-camera' device-position='back' flash={this.state.flash} binderror='error' />
-        <View className='scan-take-photo'>
-          <AtFab onClick={this.takePhoto}>
-            <AtIcon value='camera' color='#fff' size='24' />
-          </AtFab>
-        </View>
+        <Camera className='scan-camera' device-position='back' flash={this.state.flash} binderror='error'>
+          <CoverView className='scan-camera-area' />
+          <CoverView className='scan-take-photo'>
+            <CoverView className='at-fab' hover-class='at-fab-hover' onClick={this.takePhoto} aria-role='button'>
+              <CoverView className='scan-take-photo-icon'>
+                <CoverImage src={camera} />
+              </CoverView>
+            </CoverView>
+          </CoverView>
+        </Camera>
       </View>
     )
   }
