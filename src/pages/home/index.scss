@@ -1,4 +1,23 @@
 .home {
+  &-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    &-grid {
+      padding: 20px 30px;
+      .at-grid__flex .content-inner__img {
+        width: 230px;
+        height: 230px;
+      }
+    }
+    &-divider {
+      padding: 0 70px;
+    }
+  }
   &-banner {
     position: relative;
     &-image {
@@ -18,5 +37,6 @@
     left: 50%;
     bottom: 50px;
     transform: translateX(-50%);
+    z-index: 1000;
   }
 }
