@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import { AtInput, AtFab, AtIcon, AtGrid, AtDivider } from 'taro-ui'
+import { AtSearchBar, AtFab, AtIcon, AtGrid, AtDivider } from 'taro-ui'
 import banner from './banner.jpg'
 import khsw from './khsw.jpg'
 import yhlj from './yhlj.jpg'
@@ -34,7 +34,9 @@ export default class Home extends Component {
     this.setState({ value })
   }
 
-  handleSearch = () => {}
+  handleSearch = (...a) => {
+    console.log(...a)
+  }
 
   goTrashTypes = ({ type }) => {
     Taro.navigateTo({
@@ -55,18 +57,13 @@ export default class Home extends Component {
           <View className='home-banner'>
             <Image className='home-banner-image' src={banner} />
             <View className='home-banner-search'>
-              <AtInput
-                clear
-                type='text'
+              <AtSearchBar
                 placeholder='你是什么垃圾呀'
-                className='at-input--without-border'
                 value={this.state.value}
                 onChange={this.handleChange}
-              >
-                <View className='home-banner-search-button' onClick={this.handleSearch}>
-                  <AtIcon value='search' color='#000' size='20' />
-                </View>
-              </AtInput>
+                onConfirm={this.handleSearch}
+                onActionClick={this.handleSearch}
+              />
             </View>
           </View>
           <AtGrid className='home-container-grid' onClick={this.goTrashTypes} columnNum={2} data={this.state.grid} />

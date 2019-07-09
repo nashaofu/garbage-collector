@@ -24,15 +24,12 @@ export default class Scan extends Component {
   }
 
   takePhoto = () => {
+    if (this.state.loading) return
     this.cameraContext.takePhoto({
       quality: 'normal',
       success: res => {
-        Taro.uploadFile({
-          url: 'http://127.0.0.1:3000/image',
-          filePath: res.tempImagePath,
-          name: 'file'
-        }).then(data => {
-          console.log(data)
+        Taro.navigateTo({
+          url: `/pages/scan-results/index?filePath=${res.tempImagePath}`
         })
       }
     })
