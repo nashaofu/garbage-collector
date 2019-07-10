@@ -34,8 +34,10 @@ export default class Home extends Component {
     this.setState({ value })
   }
 
-  handleSearch = (...a) => {
-    console.log(...a)
+  handleSearch = () => {
+    Taro.navigateTo({
+      url: `/pages/discern-result/index?search=${this.state.value}`
+    })
   }
 
   goTrashTypes = ({ type }) => {

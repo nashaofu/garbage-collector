@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtActivityIndicator, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtActivityIndicator, AtTag, AtSearchBar } from 'taro-ui'
 import './index.scss'
 
 export default class Scan extends Component {
@@ -17,16 +17,16 @@ export default class Scan extends Component {
 
   state = {
     loading: false,
-    current: 0,
-    tags: []
+    tags: [],
+    value: ''
   }
 
   componentWillMount() {
     const { filePath } = this.$router.params
     Taro.uploadFile({
-      url: 'http://192.168.199.201:3000/image',
-      filePath: filePath,
-      name: 'file'
+      filePath,
+      name: 'file',
+      url: 'http://192.168.199.201:3000/image'
     })
       .then(({ data }) => {
         this.setState({ loading: false, tags: JSON.parse(data).tags })
@@ -40,28 +40,44 @@ export default class Scan extends Component {
       })
   }
 
-  tabClick = current => {
-    this.setState({ current })
+  tagClick = ({ name }) => {
+    this.setState({ value: '' })
+    Taro.navigateTo({
+      url: `/pages/discern-result/index?search=${name}`
+    })
+  }
+
+  handleChange = value => {
+    this.setState({ value })
+  }
+
+  handleSearch = () => {
+    Taro.navigateTo({
+      url: `/pages/discern-result/index?search=${this.state.value}`
+    })
+    this.setState({ active: '' })
   }
 
   render() {
     return (
       <View className='scan-results'>
         {this.state.loading && <AtActivityIndicator mode='center' content='加载中...' />}
-        <AtTabs
-          current={this.state.current}
-          scroll
-          tabList={this.state.tags.map(tag => ({ title: tag.value }))}
-          onClick={this.tabClick}
-        >
+        <View className='scan-results-tags'>
           {this.state.tags.map((tag, index) => {
             return (
-              <AtTabsPane key={index} current={this.state.current} index={index}>
-                <View>{tag.value}</View>
-              </AtTabsPane>
+              <AtTag circle key={index} type='primary' name={tag.value} onClick={this.tagClick}>
+                {tag.value}
+              </AtTag>
             )
           })}
-        </AtTabs>
+        </View>
+        <AtSearchBar
+          placeholder='没有找到，试试手动搜索！'
+          value={this.state.value}
+          onChange={this.handleChange}
+          onConfirm={this.handleSearch}
+          onActionClick={this.handleSearch}
+        />
       </View>
     )
   }

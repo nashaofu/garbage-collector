@@ -16,11 +16,19 @@ export default class Scan extends Component {
   }
 
   state = {
-    flash: 'off'
+    flash: 'off',
+    visible: false
   }
 
   componentDidMount() {
     this.cameraContext = Taro.createCameraContext()
+  }
+
+  componentDidShow() {
+    this.setState({ visible: true })
+  }
+  componentDidHide() {
+    this.setState({ visible: false })
   }
 
   takePhoto = () => {
@@ -36,6 +44,7 @@ export default class Scan extends Component {
   }
 
   render() {
+    if (!this.state.visible) return null
     return (
       <View className='scan'>
         <Camera className='scan-camera' device-position='back' flash={this.state.flash} binderror='error'>
