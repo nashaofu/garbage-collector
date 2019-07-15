@@ -26,7 +26,11 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    Taro.cloud.init({
+      traceUser: true
+    })
+  }
 
   componentDidShow() {}
 

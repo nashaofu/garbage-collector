@@ -23,21 +23,30 @@ export default class Scan extends Component {
 
   componentWillMount() {
     const { filePath } = this.$router.params
-    Taro.uploadFile({
-      filePath,
-      name: 'file',
-      url: 'http://192.168.199.201:3000/image'
+    Taro.getFileSystemManager().readFile({
+      filePath, // 选择图片返回的相对路径
+      encoding: 'base64', // 编码格式
+      success: ({ data }) => {
+        //成功的回调
+        Taro.cloud
+          .callFunction({
+            name: 'aliyun-image',
+            data: {
+              base64: data
+            }
+          })
+          .then(({ tags }) => {
+            this.setState({ loading: false, tags })
+          })
+          .catch(() => {
+            this.setState({ loading: false })
+            Taro.atMessage({
+              message: '图像识别失败',
+              type: 'error'
+            })
+          })
+      }
     })
-      .then(({ data }) => {
-        this.setState({ loading: false, tags: JSON.parse(data).tags })
-      })
-      .catch(() => {
-        this.setState({ loading: false })
-        Taro.atMessage({
-          message: '图像识别失败',
-          type: 'error'
-        })
-      })
   }
 
   tagClick = ({ name }) => {

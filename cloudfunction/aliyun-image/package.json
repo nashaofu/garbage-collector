@@ -1,0 +1,16 @@
+{
+  "name": "aliyun-image",
+  "version": "1.0.0",
+  "description": "aliyun图像识别",
+  "main": "index.js",
+  "keywords": [
+    "aliyun",
+    "image"
+  ],
+  "author": "nashaofu",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "wx-server-sdk": "^0.8.1"
+  }
+}
