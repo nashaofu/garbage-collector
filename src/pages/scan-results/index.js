@@ -35,9 +35,7 @@ export default class Scan extends Component {
               base64: data
             }
           })
-          .then(({ tags }) => {
-            this.setState({ loading: false, tags })
-          })
+          .then(({ result }) => this.setState({ loading: false, tags: result.tags }))
           .catch(() => {
             this.setState({ loading: false })
             Taro.atMessage({
@@ -64,7 +62,6 @@ export default class Scan extends Component {
     Taro.navigateTo({
       url: `/pages/discern-result/index?search=${this.state.value}`
     })
-    this.setState({ active: '' })
   }
 
   render() {
