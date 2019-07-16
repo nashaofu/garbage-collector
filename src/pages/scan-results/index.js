@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtActivityIndicator, AtTag, AtSearchBar } from 'taro-ui'
+import { AtActivityIndicator, AtTag, AtSearchBar, AtMessage } from 'taro-ui'
 import './index.scss'
 
 export default class Scan extends Component {
@@ -16,13 +16,14 @@ export default class Scan extends Component {
   }
 
   state = {
-    loading: false,
+    loading: true,
     tags: [],
     value: ''
   }
 
   componentWillMount() {
     const { filePath } = this.$router.params
+
     Taro.getFileSystemManager().readFile({
       filePath, // 选择图片返回的相对路径
       encoding: 'base64', // 编码格式
@@ -35,7 +36,9 @@ export default class Scan extends Component {
               base64: data
             }
           })
-          .then(({ result }) => this.setState({ loading: false, tags: result.tags }))
+          .then(({ result }) => {
+            this.setState({ loading: false, tags: result.tags })
+          })
           .catch(() => {
             this.setState({ loading: false })
             Taro.atMessage({
@@ -43,6 +46,13 @@ export default class Scan extends Component {
               type: 'error'
             })
           })
+      },
+      fail: () => {
+        this.setState({ loading: false })
+        Taro.atMessage({
+          message: '图像识别失败',
+          type: 'error'
+        })
       }
     })
   }
@@ -84,6 +94,7 @@ export default class Scan extends Component {
           onConfirm={this.handleSearch}
           onActionClick={this.handleSearch}
         />
+        <AtMessage />
       </View>
     )
   }

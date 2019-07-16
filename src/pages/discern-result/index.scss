@@ -1,4 +1,9 @@
 .discern-result {
-  height: 100%;
-  width: 100%;
+  padding: 30px 0;
+  &-image {
+    width: 230px;
+    height: 230px;
+    display: block;
+    margin: 10px auto;
+  }
 }

@@ -28,6 +28,7 @@ class App extends Component {
 
   componentDidMount() {
     Taro.cloud.init({
+      env: 'garbage-collector',
       traceUser: true
     })
   }
