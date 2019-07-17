@@ -1,9 +1,20 @@
 .discern-result {
-  padding: 30px 0;
+  padding: 24px 0;
   &-image {
-    width: 230px;
-    height: 230px;
+    width: 260px;
+    height: 260px;
     display: block;
-    margin: 10px auto;
+    margin: 70px auto 30px auto;
+  }
+  &-content {
+    padding: 60px 20px 20px 20px;
+    .at-article__p {
+      margin: 25px 0;
+    }
+  }
+  &-open-action {
+    width: 100%;
+    display: block;
+    margin: 70px auto;
   }
 }

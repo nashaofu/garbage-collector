@@ -54,13 +54,13 @@ export default class Home extends Component {
 
   render() {
     return (
-      <View className='home'>
-        <View className='home-container'>
-          <View className='home-banner'>
-            <Image className='home-banner-image' src={banner} />
-            <View className='home-banner-search'>
+      <View className="home">
+        <View className="home-container">
+          <View className="home-banner">
+            <Image className="home-banner-image" src={banner} />
+            <View className="home-banner-search">
               <AtSearchBar
-                placeholder='你是什么垃圾呀'
+                placeholder="你是什么垃圾呀"
                 value={this.state.value}
                 onChange={this.handleChange}
                 onConfirm={this.handleSearch}
@@ -68,14 +68,14 @@ export default class Home extends Component {
               />
             </View>
           </View>
-          <AtGrid className='home-container-grid' onClick={this.goTrashTypes} columnNum={2} data={this.state.grid} />
-          <View className='home-container-divider'>
-            <AtDivider content='没有更多了' fontColor='#619088' fontSize='24' />
+          <AtGrid className="home-container-grid" onClick={this.goTrashTypes} columnNum={2} data={this.state.grid} />
+          <View className="home-container-divider">
+            <AtDivider content="没有更多了" fontColor="#619088" fontSize="24" />
           </View>
         </View>
-        <View className='home-scan'>
+        <View className="home-scan">
           <AtFab onClick={this.goScan}>
-            <AtIcon value='camera' color='#fff' size='24' />
+            <AtIcon value="camera" color="#fff" size="24" />
           </AtFab>
         </View>
       </View>

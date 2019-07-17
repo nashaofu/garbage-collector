@@ -1,9 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtActivityIndicator, AtTag, AtSearchBar, AtMessage } from 'taro-ui'
+import Sorry from '../../components/sorry'
 import './index.scss'
 
-export default class Scan extends Component {
+export default class ScanResults extends Component {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -40,7 +41,7 @@ export default class Scan extends Component {
             this.setState({ loading: false, tags: result.tags })
           })
           .catch(() => {
-            this.setState({ loading: false })
+            // this.setState({ loading: false })
             Taro.atMessage({
               message: '图像识别失败',
               type: 'error'
@@ -48,7 +49,7 @@ export default class Scan extends Component {
           })
       },
       fail: () => {
-        this.setState({ loading: false })
+        // this.setState({ loading: false })
         Taro.atMessage({
           message: '图像识别失败',
           type: 'error'
@@ -75,20 +76,35 @@ export default class Scan extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View className="scan-results">
+          {this.state.loading && <AtActivityIndicator mode="center" content="加载中..." />}
+          <AtMessage />
+        </View>
+      )
+    }
+
     return (
-      <View className='scan-results'>
-        {this.state.loading && <AtActivityIndicator mode='center' content='加载中...' />}
-        <View className='scan-results-tags'>
+      <View className="scan-results">
+        <View className="scan-results-tags">
           {this.state.tags.map((tag, index) => {
             return (
-              <AtTag circle key={index} type='primary' name={tag.value} onClick={this.tagClick}>
-                {tag.value}
-              </AtTag>
+              <View key={index} className="scan-results-tags-item">
+                <AtTag circle type="primary" name={tag.value} onClick={this.tagClick}>
+                  {tag.value}
+                </AtTag>
+              </View>
             )
           })}
+          {!this.state.tags.length && (
+            <View className="scan-results-tags-empty">
+              <Sorry>没有识别结果</Sorry>
+            </View>
+          )}
         </View>
         <AtSearchBar
-          placeholder='没有找到，试试手动搜索！'
+          placeholder="试试手动搜索！"
           value={this.state.value}
           onChange={this.handleChange}
           onConfirm={this.handleSearch}

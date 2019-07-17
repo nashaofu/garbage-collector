@@ -1,5 +1,12 @@
 .scan-results {
   &-tags {
     padding: 30px 20px;
+    &-empty {
+      padding-top: 60px;
+    }
+    &-item {
+      margin: 10px;
+      display: inline-block;
+    }
   }
 }

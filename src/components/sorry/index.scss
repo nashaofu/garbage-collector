@@ -1,0 +1,15 @@
+.sorry {
+  text-align: center;
+  &-icon {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 20px auto;
+  }
+  &-text {
+    color: #888;
+    font-size: 28px;
+    line-height: 60px;
+    text-align: center;
+  }
+}

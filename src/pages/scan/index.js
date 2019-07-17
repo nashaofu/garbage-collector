@@ -46,12 +46,12 @@ export default class Scan extends Component {
   render() {
     if (!this.state.visible) return null
     return (
-      <View className='scan'>
-        <Camera className='scan-camera' device-position='back' flash={this.state.flash} binderror='error'>
-          <CoverView className='scan-camera-area' />
-          <CoverView className='scan-take-photo'>
-            <CoverView className='at-fab' hover-class='at-fab-hover' onClick={this.takePhoto} aria-role='button'>
-              <CoverView className='scan-take-photo-icon'>
+      <View className="scan">
+        <Camera className="scan-camera" device-position="back" flash={this.state.flash} binderror="error">
+          <CoverView className="scan-camera-area" />
+          <CoverView className="scan-take-photo">
+            <CoverView className="at-fab" hover-class="at-fab-hover" onClick={this.takePhoto} aria-role="button">
+              <CoverView className="scan-take-photo-icon">
                 <CoverImage src={camera} />
               </CoverView>
             </CoverView>

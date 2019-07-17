@@ -5,7 +5,6 @@
 	"description": "垃圾回收小助手",
 	"appid": "wxffb1550f5403e86f",
 	"setting": {
-		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,

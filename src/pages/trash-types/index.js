@@ -49,8 +49,8 @@ export default class TrashTypes extends Component {
   render() {
     const { type } = this.$router.params
     return (
-      <View className='trash-types'>
-        <Image className='trash-types-image' mode='widthFix' src={this.state.images[type]} />
+      <View className="trash-types">
+        <Image className="trash-types-image" mode="widthFix" src={this.state.images[type]} />
       </View>
     )
   }

@@ -27,10 +27,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Taro.cloud.init({
-      env: 'garbage-collector',
-      traceUser: true
-    })
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.cloud.init({
+        env: 'garbage-collector',
+        traceUser: true
+      })
+    }
   }
 
   componentDidShow() {}
