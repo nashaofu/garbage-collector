@@ -97,7 +97,7 @@ export default class DiscernResult extends Component {
           {type == null && (
             <View>
               <Sorry>没有匹配到分类信息</Sorry>
-              <AtButton className="discern-result-open-action" size="small" onClick={this.openActionSheet}>
+              <AtButton className="discern-result-button" onClick={this.openActionSheet}>
                 手动选择分类
               </AtButton>
               <AtActionSheet isOpened={isOpened} title="请选择分类" cancelText="取消" onClose={this.closeActionSheet}>
