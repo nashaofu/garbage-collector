@@ -1,0 +1,14 @@
+{
+  "name": "classification",
+  "version": "1.0.0",
+  "description": "垃圾手动分类",
+  "main": "index.js",
+  "keywords": [
+    "classification"
+  ],
+  "author": "nashaofu",
+  "license": "ISC",
+  "dependencies": {
+    "wx-server-sdk": "^0.8.1"
+  }
+}

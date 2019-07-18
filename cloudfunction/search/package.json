@@ -1,0 +1,14 @@
+{
+  "name": "search",
+  "version": "1.0.0",
+  "description": "垃圾分类搜索",
+  "main": "index.js",
+  "keywords": [
+    "search"
+  ],
+  "author": "nashaofu",
+  "license": "ISC",
+  "dependencies": {
+    "wx-server-sdk": "^0.8.1"
+  }
+}

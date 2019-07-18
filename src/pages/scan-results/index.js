@@ -41,7 +41,7 @@ export default class ScanResults extends Component {
             this.setState({ loading: false, tags: result.tags })
           })
           .catch(() => {
-            // this.setState({ loading: false })
+            this.setState({ loading: false })
             Taro.atMessage({
               message: '图像识别失败',
               type: 'error'
@@ -49,7 +49,7 @@ export default class ScanResults extends Component {
           })
       },
       fail: () => {
-        // this.setState({ loading: false })
+        this.setState({ loading: false })
         Taro.atMessage({
           message: '图像识别失败',
           type: 'error'
@@ -79,7 +79,7 @@ export default class ScanResults extends Component {
     if (this.state.loading) {
       return (
         <View className="scan-results">
-          {this.state.loading && <AtActivityIndicator mode="center" content="加载中..." />}
+          {this.state.loading && <AtActivityIndicator mode="center" size={36} content="加载中..." />}
           <AtMessage />
         </View>
       )

@@ -1,6 +1,6 @@
 import { View, Image } from '@tarojs/components'
 import Taro, { Component } from '@tarojs/taro'
-import { AtCard, AtButton, AtActionSheet, AtActionSheetItem, AtMessage } from 'taro-ui'
+import { AtCard, AtButton, AtActionSheet, AtActionSheetItem, AtActivityIndicator, AtMessage } from 'taro-ui'
 import Sorry from '../../components/sorry'
 import khsw from '../../images/khsw.jpg'
 import yhlj from '../../images/yhlj.jpg'
@@ -22,6 +22,8 @@ export default class DiscernResult extends Component {
   }
 
   state = {
+    loading: true,
+    loadingText: '正在查询分类信息...',
     search: '',
     type: null,
     isOpened: false,
@@ -48,22 +50,35 @@ export default class DiscernResult extends Component {
   componentWillMount() {
     const { search } = this.$router.params
     this.setState({ search })
-
-    const db = Taro.cloud.database()
-    const collection = db.collection('garbage-collector-test')
-    collection
-      .where({
-        name: db.command.eq(search)
+    Taro.cloud
+      .callFunction({
+        name: 'search',
+        data: {
+          search
+        }
       })
-      .limit(1)
-      .get()
-      .then(({ data }) => {
-        this.setState({ type: (data[0] || {}).type })
+      .then(({ result }) => {
+        this.setState({
+          loading: false,
+          type: (result.data || {}).type
+        })
+      })
+      .catch(() => {
+        this.setState({ loading: false })
+        Taro.atMessage({
+          message: '查询分类信息失败',
+          type: 'error'
+        })
       })
   }
 
   componentDidHide() {
-    this.setState({ search: '', type: null })
+    this.setState({
+      loading: true,
+      loadingText: '正在查询分类信息...',
+      search: '',
+      type: null
+    })
   }
 
   openActionSheet = () => {
@@ -75,15 +90,44 @@ export default class DiscernResult extends Component {
   }
 
   selectType = type => {
-    this.setState({ isOpened: false, type })
+    this.setState({
+      isOpened: false,
+      loading: true,
+      loadingText: '正在设置分类信息...'
+    })
+    Taro.cloud
+      .callFunction({
+        name: 'classification',
+        data: {
+          type,
+          name: this.state.search
+        }
+      })
+      .then(data => {
+        this.setState({
+          type,
+          loading: false,
+          loadingText: '正在查询分类信息...'
+        })
+      })
+      .catch(() => {
+        Taro.atMessage({
+          message: '设置分类信息失败',
+          type: 'error'
+        })
+        this.setState({
+          loading: false,
+          loadingText: '正在查询分类信息...'
+        })
+      })
   }
 
   render() {
-    const { search, type, typesTitle, typesImage, typesDesc, isOpened } = this.state
+    const { loading, loadingText, search, type, typesTitle, typesImage, typesDesc, isOpened } = this.state
 
     return (
       <View className="discern-result">
-        <AtCard title={search} extra={typesTitle[type]} note="垃圾分类，人人有责！">
+        <AtCard className="discern-result-card" title={search} extra={typesTitle[type]} note="垃圾分类，人人有责！">
           {type != null && (
             <View>
               <Image className="discern-result-image" src={typesImage[type]} />
@@ -91,6 +135,9 @@ export default class DiscernResult extends Component {
                 <View className="at-article_h1">名称：{search}</View>
                 <View className="at-article_h1">类别：{typesTitle[type]}</View>
                 <View className="at-article__p">{typesDesc[type]}</View>
+                <AtButton className="discern-result-button" onClick={this.openActionSheet}>
+                  分类信息错误，修改分类
+                </AtButton>
               </View>
             </View>
           )}
@@ -100,15 +147,20 @@ export default class DiscernResult extends Component {
               <AtButton className="discern-result-button" onClick={this.openActionSheet}>
                 手动选择分类
               </AtButton>
-              <AtActionSheet isOpened={isOpened} title="请选择分类" cancelText="取消" onClose={this.closeActionSheet}>
-                {Object.keys(typesTitle).map(key => {
-                  return (
-                    <AtActionSheetItem key={key} onClick={() => this.selectType(key)}>
-                      {typesTitle[key]}
-                    </AtActionSheetItem>
-                  )
-                })}
-              </AtActionSheet>
+            </View>
+          )}
+          <AtActionSheet isOpened={isOpened} title="请选择分类" cancelText="取消" onClose={this.closeActionSheet}>
+            {Object.keys(typesTitle).map(key => {
+              return (
+                <AtActionSheetItem key={key} onClick={() => this.selectType(parseInt(key))}>
+                  {typesTitle[key]}
+                </AtActionSheetItem>
+              )
+            })}
+          </AtActionSheet>
+          {loading && (
+            <View className="discern-result-lodaing">
+              <AtActivityIndicator mode="center" size={36} content={loadingText} />
             </View>
           )}
         </AtCard>

@@ -6,9 +6,6 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-
-  console.log(event)
   const { data } = await request(event.base64)
-
   return data
 }

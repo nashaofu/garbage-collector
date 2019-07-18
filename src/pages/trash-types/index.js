@@ -38,12 +38,6 @@ export default class TrashTypes extends Component {
     Taro.setNavigationBarTitle({
       title: this.state.types[type]
     })
-    Taro.getImageInfo({
-      src: this.state.images[type],
-      success: res => {
-        console.log(res)
-      }
-    })
   }
 
   render() {
