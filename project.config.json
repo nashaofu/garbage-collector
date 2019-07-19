@@ -1,23 +1,22 @@
 {
+  "projectname": "garbage-collector",
+  "appid": "wxffb1550f5403e86f",
+  "description": "垃圾回收小助手",
   "miniprogramRoot": "dist/",
   "cloudfunctionRoot": "cloudfunction/",
-  "projectname": "garbage-collector",
-  "description": "垃圾回收小助手",
-  "appid": "wxffb1550f5403e86f",
   "compileType": "miniprogram",
   "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "libVersion": "2.7.7",
-  "condition": {},
   "setting": {
     "urlCheck": true,
     "es6": true,
+    "enhance": true,
     "postcss": true,
     "minified": true,
     "newFeature": true,
     "coverView": true,
-    "autoAudits": false,
+    "autoAudits": true,
+    "uglifyFileName": true,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
@@ -25,7 +24,7 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    },
-    "enhance": true
-  }
+    }
+  },
+  "condition": {}
 }
