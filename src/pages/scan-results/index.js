@@ -38,7 +38,7 @@ export default class ScanResults extends Component {
             }
           })
           .then(({ result }) => {
-            this.setState({ loading: false, tags: result.tags })
+            this.setState({ loading: false, tags: result.data.tags })
           })
           .catch(() => {
             this.setState({ loading: false })
@@ -56,6 +56,10 @@ export default class ScanResults extends Component {
         })
       }
     })
+  }
+
+  componentDidHide() {
+    this.setState({ loading: false, value: '' })
   }
 
   tagClick = ({ name }) => {

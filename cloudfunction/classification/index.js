@@ -22,9 +22,11 @@ exports.main = async (event, context) => {
     const types = {}
     types[event.type] = _.inc(1)
     const { stats } = await collection.doc(result.data._id).update({
-      types
+      data: {
+        types
+      }
     })
-    if (stats.updated < 1) throw new Error('没有更新')
+    if (stats.updated < 1) throw new Error('更新失败')
     return {
       data: await collection.doc(result.data._id).get()
     }

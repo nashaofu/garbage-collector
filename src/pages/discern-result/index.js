@@ -58,9 +58,19 @@ export default class DiscernResult extends Component {
         }
       })
       .then(({ result }) => {
+        let type = null
+        if (result.data) {
+          // 获得分类值最大的类别作为最终的分类
+          const key = Object.entries((result.data || {}).types).reduce((max, value) => {
+            if (max[1] < value[1]) max = value
+            return max
+          })[0]
+          type = parseInt(key)
+        }
+
         this.setState({
-          loading: false,
-          type: (result.data || {}).type
+          type,
+          loading: false
         })
       })
       .catch(() => {

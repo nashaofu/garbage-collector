@@ -15,16 +15,7 @@ exports.main = async (event, context) => {
     .limit(1)
     .get()
 
-  data = data[0]
-  if (data) {
-    // 获得分类值最大的类别作为最终的分类
-    data.type = Object.entries(data.types).reduce((max, value) => {
-      if (max[1] < value[1]) max = value
-      return max
-    })[0]
-  }
-
   return {
-    data
+    data: data[0]
   }
 }

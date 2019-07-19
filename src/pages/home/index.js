@@ -30,6 +30,10 @@ export default class Home extends Component {
     ]
   }
 
+  componentDidHide () {
+    this.setState({ value: '' })
+  }
+
   handleChange = value => {
     this.setState({ value })
   }
