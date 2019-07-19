@@ -18,9 +18,11 @@ exports.main = async (event, context) => {
   })
 
   if (result.data) {
+    const types = {}
+    types[event.type] = db.command.inc(1)
     const data = {
-      type: event.type,
-      updater: wxContext.OPENID,
+      types,
+      updater: db.command.push(wxContext.OPENID),
       updateTime: new Date()
     }
     const { stats } = await collection
@@ -41,14 +43,21 @@ exports.main = async (event, context) => {
       throw new Error('没有更新')
     }
   } else {
+    const types = {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0
+    }
+    types[event.type] = 1
     const { _id } = await collection.add({
       // data 字段表示需新增的 JSON 数据
       data: {
         name: event.name,
-        type: event.type,
+        types,
         creator: wxContext.OPENID,
         createTime: new Date(),
-        updater: wxContext.OPENID,
+        updater: [wxContext.OPENID],
         updateTime: new Date()
       }
     })

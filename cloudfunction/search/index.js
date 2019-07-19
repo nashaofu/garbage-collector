@@ -7,14 +7,23 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const collection = db.collection('garbage-collector-test')
-  const { data } = await collection
+  let { data } = await collection
     .where({
       name: db.command.eq(event.search)
     })
     .limit(1)
     .get()
 
+  data = data[0]
+  if (data) {
+    // 获得分类值最大的类别作为最终的分类
+    data.type = Object.entries(data.types).reduce((max, value) => {
+      if (max[1] < value[1]) max = value
+      return max
+    })[0]
+  }
+
   return {
-    data: data[0]
+    data
   }
 }
