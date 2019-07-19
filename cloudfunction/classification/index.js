@@ -3,6 +3,7 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 const db = cloud.database()
+const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -19,28 +20,13 @@ exports.main = async (event, context) => {
 
   if (result.data) {
     const types = {}
-    types[event.type] = db.command.inc(1)
-    const data = {
-      types,
-      updater: db.command.push(wxContext.OPENID),
-      updateTime: new Date()
-    }
-    const { stats } = await collection
-      .where({
-        _id: db.command.eq(result.data._id)
-      })
-      .update({
-        data
-      })
-    if (stats.updated > 0) {
-      return {
-        data: {
-          ...result.data,
-          ...data
-        }
-      }
-    } else {
-      throw new Error('没有更新')
+    types[event.type] = _.inc(1)
+    const { stats } = await collection.doc(result.data._id).update({
+      types
+    })
+    if (stats.updated < 1) throw new Error('没有更新')
+    return {
+      data: await collection.doc(result.data._id).get()
     }
   } else {
     const types = {
@@ -56,9 +42,7 @@ exports.main = async (event, context) => {
         name: event.name,
         types,
         creator: wxContext.OPENID,
-        createTime: new Date(),
-        updater: [wxContext.OPENID],
-        updateTime: new Date()
+        createTime: new Date()
       }
     })
     return {

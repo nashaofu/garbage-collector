@@ -103,7 +103,7 @@ export default class DiscernResult extends Component {
           name: this.state.search
         }
       })
-      .then(data => {
+      .then(() => {
         this.setState({
           type,
           loading: false,
