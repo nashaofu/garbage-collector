@@ -16,7 +16,7 @@ function sha1(stringToSign, secret) {
     .toString('base64')
 }
 
-module.exports = function formatOptions({ headers, ...options }) {
+module.exports = ({ headers, ...options }) => {
   const stringToSign = [
     options.method,
     headers.accept,

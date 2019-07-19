@@ -9,7 +9,7 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  const collection = db.collection('garbage-collector-test')
+  const collection = db.collection('garbage-collector')
 
   const { result } = await cloud.callFunction({
     name: 'search',
