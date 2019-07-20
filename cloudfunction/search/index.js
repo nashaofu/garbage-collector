@@ -9,9 +9,6 @@ const _ = db.command
 exports.main = async (event, context) => {
   if (!event.search) throw new Error('物品名称不能为空')
 
-  const wxContext = cloud.getWXContext()
-  if (!wxContext.OPENID) throw new Error('非法调用')
-
   const collection = db.collection('garbage-collector')
   let { data } = await collection
     .where({

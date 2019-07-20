@@ -22,7 +22,7 @@ exports.main = async (event, context) => {
     }
   })
 
-  if (result.data) {
+  if (result && result.data) {
     const types = {}
     types[event.type] = _.inc(1)
     const { stats } = await collection.doc(result.data._id).update({
