@@ -30,7 +30,7 @@ export default class Home extends Component {
     ]
   }
 
-  componentDidHide () {
+  componentDidHide() {
     this.setState({ value: '' })
   }
 
@@ -39,6 +39,7 @@ export default class Home extends Component {
   }
 
   handleSearch = () => {
+    if (!this.state.value) return
     Taro.navigateTo({
       url: `/pages/discern-result/index?search=${this.state.value}`
     })

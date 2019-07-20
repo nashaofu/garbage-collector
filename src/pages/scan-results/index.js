@@ -24,6 +24,7 @@ export default class ScanResults extends Component {
 
   componentWillMount() {
     const { filePath } = this.$router.params
+    if (!filePath) return Taro.navigateBack({ delta: 1 })
 
     Taro.getFileSystemManager().readFile({
       filePath, // 选择图片返回的相对路径
@@ -51,7 +52,7 @@ export default class ScanResults extends Component {
       fail: () => {
         this.setState({ loading: false })
         Taro.atMessage({
-          message: '图像识别失败',
+          message: '获取图片失败',
           type: 'error'
         })
       }
@@ -63,6 +64,7 @@ export default class ScanResults extends Component {
   }
 
   tagClick = ({ name }) => {
+    if (!name) return
     this.setState({ value: '' })
     Taro.navigateTo({
       url: `/pages/discern-result/index?search=${name}`
@@ -74,6 +76,7 @@ export default class ScanResults extends Component {
   }
 
   handleSearch = () => {
+    if (!this.state.value) return
     Taro.navigateTo({
       url: `/pages/discern-result/index?search=${this.state.value}`
     })

@@ -49,6 +49,7 @@ export default class DiscernResult extends Component {
 
   componentWillMount() {
     const { search } = this.$router.params
+    if (!search) return Taro.navigateBack({ delta: 1 })
     this.setState({ search })
     Taro.cloud
       .callFunction({
