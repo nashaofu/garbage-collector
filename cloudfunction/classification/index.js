@@ -7,7 +7,11 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  if (!event.name) throw new Error('必须输入物品名称')
+  if (event.type < 0 || event.type > 3) throw new Error('物品分类错误')
+
   const wxContext = cloud.getWXContext()
+  if (!wxContext.OPENID) throw new Error('非法调用')
 
   const collection = db.collection('garbage-collector')
 
