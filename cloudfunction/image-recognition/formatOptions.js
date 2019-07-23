@@ -1,6 +1,9 @@
 const { URL } = require('url')
 const crypto = require('crypto')
 
+const ALIYUN_ACCESS_KEY_ID = process.env.ALIYUN_ACCESS_KEY_ID
+const ALIYUN_ACCESS_KEY_SECRET = process.env.ALIYUN_ACCESS_KEY_SECRET
+
 // 这里填写AK和请求
 function md5(buffer) {
   const hash = crypto.createHash('md5')
@@ -30,7 +33,7 @@ module.exports = ({ headers, ...options }) => {
     ...options,
     headers: {
       ...headers,
-      Authorization: `Dataplus ${process.env.AccessKeyId}:${sha1(stringToSign, process.env.AccessKeySecret)}`
+      Authorization: `Dataplus ${ALIYUN_ACCESS_KEY_ID}:${sha1(stringToSign, ALIYUN_ACCESS_KEY_SECRET)}`
     }
   }
 }

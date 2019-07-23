@@ -1,24 +1,14 @@
-// 云函数入口文件
 const axios = require('axios')
-const cloud = require('wx-server-sdk')
 const formatOptions = require('./formatOptions')
 
-cloud.init()
-
-// 云函数入口函数
-exports.main = async (event, context) => {
-  if (!event.base64) throw new Error('没有有效的图片资源')
-
-  const wxContext = cloud.getWXContext()
-  if (!wxContext.OPENID) throw new Error('非法调用')
-
+module.exports = async base64 => {
   const { data } = await axios(
     formatOptions({
       url: 'https://dtplus-cn-shanghai.data.aliyuncs.com/image/tag',
       method: 'POST',
       data: JSON.stringify({
         type: 1,
-        content: event.base64
+        content: base64
       }),
       headers: {
         accept: 'application/json',
@@ -28,6 +18,9 @@ exports.main = async (event, context) => {
     })
   )
   return {
-    data
+    data: data.tags.map(({ value, confidence }) => ({
+      keyword: value,
+      confidence
+    }))
   }
 }

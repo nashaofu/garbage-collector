@@ -34,7 +34,7 @@ export default class Scan extends Component {
   takePhoto = () => {
     if (this.state.loading) return
     this.cameraContext.takePhoto({
-      quality: 'normal',
+      quality: 'low',
       success: res => {
         Taro.navigateTo({
           url: `/pages/scan-results/index?filePath=${res.tempImagePath}`

@@ -1,16 +1,19 @@
 {
-  "name": "aliyun-image",
+  "name": "image-recognition",
   "version": "1.0.0",
-  "description": "aliyun图像识别",
+  "description": "图像识别API",
   "main": "index.js",
   "keywords": [
     "aliyun",
-    "image"
+    "baidu",
+    "image",
+    "recognition"
   ],
   "author": "nashaofu",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
+    "baidu-aip-sdk": "^2.3.9",
     "wx-server-sdk": "^0.8.1"
   }
 }

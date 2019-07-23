@@ -30,10 +30,10 @@ export default class ScanResults extends Component {
       filePath, // 选择图片返回的相对路径
       encoding: 'base64', // 编码格式
       success: ({ data }) => {
-        //成功的回调
+        // 按条件不同分发到不同服务
         Taro.cloud
           .callFunction({
-            name: 'aliyun-image',
+            name: 'image-recognition',
             data: {
               base64: data
             }
