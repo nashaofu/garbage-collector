@@ -39,7 +39,7 @@ export default class ScanResults extends Component {
             }
           })
           .then(({ result }) => {
-            this.setState({ loading: false, tags: result.data.tags })
+            this.setState({ loading: false, tags: result.data })
           })
           .catch(() => {
             this.setState({ loading: false })
@@ -98,8 +98,8 @@ export default class ScanResults extends Component {
           {this.state.tags.map((tag, index) => {
             return (
               <View key={index} className="scan-results-tags-item">
-                <AtTag circle type="primary" name={tag.value} onClick={this.tagClick}>
-                  {tag.value}
+                <AtTag circle type="primary" name={tag.keyword} onClick={this.tagClick}>
+                  {tag.keyword}
                 </AtTag>
               </View>
             )

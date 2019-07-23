@@ -1,8 +1,6 @@
 const { URL } = require('url')
 const crypto = require('crypto')
-
-const ALIYUN_ACCESS_KEY_ID = process.env.ALIYUN_ACCESS_KEY_ID
-const ALIYUN_ACCESS_KEY_SECRET = process.env.ALIYUN_ACCESS_KEY_SECRET
+const { ALIYUN_ACCESS_KEY_ID, ALIYUN_ACCESS_KEY_SECRET } = require('./env')
 
 // 这里填写AK和请求
 function md5(buffer) {

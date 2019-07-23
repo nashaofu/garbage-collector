@@ -1,8 +1,6 @@
 const { imageClassify } = require('baidu-aip-sdk')
+const { BAIDU_APP_ID, BAIDU_API_KEY, BAIDU_SECRET_KEY } = require('./env')
 
-const BAIDU_APP_ID = process.env.BAIDU_APP_ID
-const BAIDU_API_KEY = process.env.BAIDU_API_KEY
-const BAIDU_SECRET_KEY = process.env.BAIDU_SECRET_KEY
 const client = new imageClassify(BAIDU_APP_ID, BAIDU_API_KEY, BAIDU_SECRET_KEY)
 
 // 云函数入口函数

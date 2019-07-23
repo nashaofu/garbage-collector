@@ -15,7 +15,6 @@ exports.main = async (event, context) => {
   if (!wxContext.OPENID) throw new Error('非法调用')
 
   i++
-  if (i > 100000) i = 0
   // 分流请求
   if (i % 2 == 0) {
     return baiduImage(event.base64)

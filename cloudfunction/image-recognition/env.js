@@ -1,0 +1,10 @@
+module.exports = {
+  // 百度
+  BAIDU_APP_ID: process.env.BAIDUAPPID,
+  BAIDU_API_KEY: process.env.BAIDUAPIKEY,
+  BAIDU_SECRET_KEY: process.env.BAIDUSECRETKEY,
+
+  // 阿里云
+  ALIYUN_ACCESS_KEY_ID: process.env.ALIYUNACCESSKEYID,
+  ALIYUN_ACCESS_KEY_SECRET: process.env.ALIYUNACCESSKEYSECRET
+}
