@@ -1,5 +1,62 @@
+$color0: 0, rgb(0, 69, 124);
+$color1: 1, rgb(216, 55, 35);
+$color2: 2, rgb(101, 63, 52);
+$color3: 3, rgb(42, 41, 37);
+
 .trash-types {
+  .at-article__p {
+    line-height: 48px;
+  }
+  @each $i, $color in $color0, $color1, $color2, $color3 {
+    &-#{$i} {
+      color: $color;
+      .at-article__p {
+        color: $color;
+      }
+      .trash-types-title,
+      .trash-types-list-item:before {
+        background-color: $color;
+      }
+    }
+  }
+
   &-image {
-    width: 100%;
+    width: 280px;
+    height: 280px;
+    display: block;
+    margin: 30px auto;
+  }
+
+  &-content {
+    text-indent: 2em;
+  }
+
+  &-title {
+    text-align: center;
+    line-height: 60px;
+    padding: 7px 0;
+    font-size: 40px;
+    margin: 30px;
+    color: #fff;
+  }
+
+  &-list {
+    margin: 30px;
+    &-item {
+      padding-left: 40px;
+      position: relative;
+      line-height: 48px;
+      font-size: 30px;
+      &:before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        left: 15px;
+        top: 16px;
+      }
+    }
   }
 }

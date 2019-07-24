@@ -1,11 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtSearchBar, AtFab, AtIcon, AtGrid, AtDivider } from 'taro-ui'
+import images from '../../types/image'
 import banner from './banner.jpg'
-import khsw from '../../images/khsw.jpg'
-import yhlj from '../../images/yhlj.jpg'
-import slj from '../../images/slj.jpg'
-import glj from '../../images/glj.jpg'
 import './index.scss'
 
 export default class Home extends Component {
@@ -22,12 +19,10 @@ export default class Home extends Component {
 
   state = {
     value: '',
-    grid: [
-      { image: khsw, type: 'khsw' },
-      { image: yhlj, type: 'yhlj' },
-      { image: slj, type: 'slj' },
-      { image: glj, type: 'glj' }
-    ]
+    grid: Object.keys(images).map(key => ({
+      image: images[key],
+      type: key
+    }))
   }
 
   componentDidHide() {

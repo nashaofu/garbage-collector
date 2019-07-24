@@ -1,9 +1,11 @@
+import classnames from 'classnames'
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import khsw from './khsw.jpg'
-import yhlj from './yhlj.jpg'
-import slj from './slj.jpg'
-import glj from './glj.jpg'
+import typesTitle from '../../types/title'
+import typesImage from '../../types/image'
+import typesDesc from '../../types/desc'
+import requirement from '../../types/requirement'
+
 import './index.scss'
 
 export default class TrashTypes extends Component {
@@ -19,32 +21,45 @@ export default class TrashTypes extends Component {
   }
 
   state = {
-    types: {
-      khsw: '可回收垃圾',
-      yhlj: '有害垃圾',
-      slj: '湿垃圾',
-      glj: '干垃圾'
-    },
-    images: {
-      khsw,
-      yhlj,
-      slj,
-      glj
+    typesTitle,
+    typesImage,
+    typesDesc,
+    requirement,
+    color: {
+      0: 'trash-types-0',
+      1: 'trash-types-1',
+      2: 'trash-types-2',
+      3: 'trash-types-3'
     }
   }
 
   componentWillMount() {
     const { type } = this.$router.params
     Taro.setNavigationBarTitle({
-      title: this.state.types[type]
+      title: this.state.typesTitle[type]
     })
   }
 
   render() {
     const { type } = this.$router.params
+    const requirements = this.state.requirement[type] || []
+
     return (
-      <View className="trash-types">
-        <Image className="trash-types-image" mode="widthFix" src={this.state.images[type]} />
+      <View className={classnames('trash-types', this.state.color[type])}>
+        <View className="at-article">
+          <Image className="trash-types-image" src={this.state.typesImage[type]} />
+          <View className="trash-types-content at-article__p">{this.state.typesDesc[type]}</View>
+          <View className="trash-types-title">{this.state.typesTitle[type]}投放要求</View>
+          <View className="trash-types-list">
+            {requirements.map((text, index) => {
+              return (
+                <View className="trash-types-list-item" key={index}>
+                  {text}
+                </View>
+              )
+            })}
+          </View>
+        </View>
       </View>
     )
   }
