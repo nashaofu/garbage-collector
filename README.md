@@ -15,13 +15,14 @@
    - 阿里云（阿里云图像打标）文档地址：https://help.aliyun.com/product/53258.html
    - 百度云（百度云图像识别）文档地址：https://cloud.baidu.com/doc/IMAGERECOGNITION/index.html
 5. 服务端（云函数）环境变量：
-   | key | 说明 |
-   | --- | --- |
-   | ALIYUNACCESSKEYID | 阿里云 AccessKey ID |
-   | ALIYUNACCESSKEYSECRET | 阿里云 Access Key Secret |
-   | BAIDUAPPID | 百度图像识别应用 AppID |
-   | BAIDUAPIKEY | 百度图像识别应用 API Key |
-   | BAIDUSECRETKEY | 百度图像识别应用 Secret Key |
+
+   | key                   | 说明                        |
+   | --------------------- | --------------------------- |
+   | ALIYUNACCESSKEYID     | 阿里云 AccessKey ID         |
+   | ALIYUNACCESSKEYSECRET | 阿里云 Access Key Secret    |
+   | BAIDUAPPID            | 百度图像识别应用 AppID      |
+   | BAIDUAPIKEY           | 百度图像识别应用 API Key    |
+   | BAIDUSECRETKEY        | 百度图像识别应用 Secret Key |
 
    ![阿里云](./aliyun.jpg)
    ![百度云](./baidu.jpg)
