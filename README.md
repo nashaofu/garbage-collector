@@ -28,6 +28,6 @@
    ![百度云](./baidu.jpg)
 
 6. 小程序开发者工具云开发配置，创建新环境：garbage-collector
-   - 创建数据库`garbage-collector`，并导入项目跟目下[`garbage-collector.json`](./garbage-collector.json)
+   - 创建数据库`garbage-collector`，并导入项目跟目录下[`garbage-collector.json`](./garbage-collector.json)
    - 上传`cloudfunction`文件夹中的云函数，并配置`image-recognition`函数环境变量
      ![云函数配置image-recognition](./image-recognition.jpg)
