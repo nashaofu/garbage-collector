@@ -6,6 +6,10 @@
 
 ![垃圾回收小助手](./qrcode.jpg)
 
+## 小程序截图
+
+![垃圾回收小助手](./miniprogram.jpeg)
+
 ## 开发与部署
 
 1. 修改`project.config.json`中的 appid 为自己的小程序 appid
