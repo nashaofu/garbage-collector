@@ -8,7 +8,7 @@
 
 ## 小程序截图
 
-![垃圾回收小助手](./miniprogram.jpeg)
+![垃圾回收小助手](./miniprogram.jpg)
 
 ## 开发与部署
 
