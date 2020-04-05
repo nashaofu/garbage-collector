@@ -97,7 +97,7 @@ export default class ScanResults extends Component {
         <View className="scan-results-tags">
           {this.state.tags.map((tag, index) => {
             return (
-              <View key={index} className="scan-results-tags-item">
+              <View key={`${tag.keyword}-${index}`} className="scan-results-tags-item">
                 <AtTag circle type="primary" name={tag.keyword} onClick={this.tagClick}>
                   {tag.keyword}
                 </AtTag>
