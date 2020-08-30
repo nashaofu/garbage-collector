@@ -1,5 +1,6 @@
+import React, { Component } from 'react'
 import classnames from 'classnames'
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import typesTitle from '../../types/title'
 import typesImage from '../../types/image'
@@ -9,17 +10,6 @@ import requirement from '../../types/requirement'
 import './index.scss'
 
 export default class TrashTypes extends Component {
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config = {
-    navigationBarTitleText: ''
-  }
-
   state = {
     typesTitle,
     typesImage,
@@ -33,15 +23,15 @@ export default class TrashTypes extends Component {
     }
   }
 
-  componentWillMount() {
-    const { type } = this.$router.params
+  componentDidMount() {
+    const { type } = Taro.getCurrentInstance().router.params
     Taro.setNavigationBarTitle({
       title: this.state.typesTitle[type]
     })
   }
 
   render() {
-    const { type } = this.$router.params
+    const { type } = Taro.getCurrentInstance().router.params
     const requirements = this.state.requirement[type] || []
 
     return (

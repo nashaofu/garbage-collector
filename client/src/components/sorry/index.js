@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import React from 'react'
 import { View, Image } from '@tarojs/components'
 import sorry from './sorry.svg'
 import './index.scss'

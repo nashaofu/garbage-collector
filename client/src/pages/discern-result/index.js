@@ -1,6 +1,7 @@
+import React, { Component } from 'react'
 import classnames from 'classnames'
 import { View, Image } from '@tarojs/components'
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { AtCard, AtButton, AtActionSheet, AtActionSheetItem, AtActivityIndicator, AtMessage } from 'taro-ui'
 import Sorry from '../../components/sorry'
 import typesTitle from '../../types/title'
@@ -11,17 +12,6 @@ import requirement from '../../types/requirement'
 import './index.scss'
 
 export default class DiscernResult extends Component {
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config = {
-    navigationBarTitleText: '识别结果'
-  }
-
   state = {
     loading: true,
     loadingText: '正在查询分类信息...',
@@ -40,8 +30,8 @@ export default class DiscernResult extends Component {
     }
   }
 
-  componentWillMount() {
-    const { search } = this.$router.params
+  componentDidMount() {
+    const { search } = Taro.getCurrentInstance().router.params
     if (!search) return Taro.navigateBack({ delta: 1 })
     this.setState({ search })
     Taro.cloud
@@ -74,15 +64,6 @@ export default class DiscernResult extends Component {
           type: 'error'
         })
       })
-  }
-
-  componentDidHide() {
-    this.setState({
-      loading: true,
-      loadingText: '正在查询分类信息...',
-      search: '',
-      type: null
-    })
   }
 
   openActionSheet = () => {
